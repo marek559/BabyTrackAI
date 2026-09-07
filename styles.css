@@ -468,3 +468,110 @@
     --is-border: rgba(29,37,56,.15);
     --is-color: var(--ink-soft);
   }
+
+  /* ============ COMPACT LANDING PAGE ============ */
+  :root{--maxw:1120px}
+  body{font-size:16px}
+  section{padding:64px 0}
+  .nav-inner{padding:10px 24px}
+  .brand .mark{width:36px;height:36px}
+  .brand .name{font-size:19px}
+  .nav-links{gap:20px}
+  .nav-links a{font-size:14px}
+  .btn{padding:10px 17px;font-size:14px}
+
+  .hero{padding:58px 0 52px}
+  .hero-grid{grid-template-columns:1.15fr .85fr;gap:56px}
+  .h1{font-size:clamp(48px,6.5vw,76px);margin-bottom:18px}
+  .hero-sub{font-size:17px;max-width:540px;margin-bottom:24px}
+  .hero-art{aspect-ratio:1/0.86;border-radius:24px}
+  .hero-art .hero-logo{width:68%}
+  .hero-art .badge{left:14px;bottom:14px;padding:9px 11px;font-size:12px}
+  .hero-meta{gap:8px;margin-top:4px}
+  .hero-meta span:not(.sep){background:rgba(255,255,255,.7);border:1px solid rgba(29,37,56,.1);border-radius:999px;padding:6px 10px;font-size:12px}
+  .hero-meta .sep{display:none}
+
+  .chapter-head{margin-bottom:24px;display:block}
+  .chapter-head .num{min-width:0;margin-bottom:8px}
+  .chapter-mark{display:none}
+  .chapter-head h2{font-size:clamp(34px,4vw,48px)}
+  .chapter-head .lede{font-size:16px;margin:6px 0 0}
+
+  .why{padding-top:52px}
+  .why-list{grid-template-columns:repeat(4,1fr);gap:12px;border:0}
+  .why-item{display:flex;flex-direction:column;gap:10px;padding:22px 18px;border:1px solid rgba(29,37,56,.12);border-radius:16px;background:#fff;min-height:210px;box-shadow:0 12px 30px -28px rgba(29,37,56,.55)}
+  .why-num{font-size:16px;order:0}
+  .why-title{font-size:21px;order:1}
+  .why-desc{font-size:13px;line-height:1.5;order:2}
+  .why-icon{display:none}
+
+  .stages{padding:64px 0;background:linear-gradient(180deg,var(--paper-2),var(--paper))}
+  .stage-card{padding:24px 26px;margin-bottom:12px;border-radius:18px}
+  .stage-grid{grid-template-columns:112px 1fr;gap:24px;align-items:center}
+  .stage-age{text-align:left}
+  .stage-age .num{font-size:48px}
+  .stage-age .tag{margin-top:8px;font-size:10px;padding:4px 8px}
+  .stage-title{font-size:25px}
+  .stage-duration{font-size:13px;margin-bottom:12px}
+  .stage-art{display:none}
+  .step{margin:7px 0}
+  .step .bullet{margin-top:6px}
+  .step p,.step p span{font-size:13.5px}
+  .stage-grid > div:nth-child(2) .step:nth-of-type(n+4){display:none}
+  .between-stages{margin:8px 0;font-size:13px}
+  .stages-note{display:none}
+
+  .criteria{padding:58px 0}
+  .criteria-card{padding:24px;border-radius:18px}
+  .crit-grid{gap:0 28px}
+  .crit{padding:10px 0}
+  .crit .check{width:24px;height:24px}
+  .crit .t{font-size:14px}
+  .crit .d{font-size:13px}
+
+  .contact{padding:64px 0 56px}
+  .contact-grid{grid-template-columns:.8fr 1.2fr;gap:36px}
+  .contact-info h3{font-size:30px;margin-bottom:12px}
+  .contact-row{margin:13px 0}
+  .contact-row .ico{width:34px;height:34px}
+  .contact-row .v{font-size:15px}
+  .form-card{padding:26px;border-radius:18px}
+  .form-card h4{font-size:24px}
+  .form-card .sub{margin-bottom:16px}
+  .field textarea{min-height:72px}
+  .rodo{display:none}
+
+  footer{padding:20px 0;background:#202c42}
+  footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  footer .brand .mark{width:30px;height:30px}
+  footer .brand .name{font-size:17px}
+  footer .footer-contact{display:flex;gap:16px;font-size:13px}
+  footer .footer-contact a{color:#fff;text-decoration:none}
+  footer .copy{width:100%;margin:0;padding-top:12px;font-size:11.5px}
+
+  @media (max-width:880px){
+    section{padding:54px 0}
+    .hero-grid,.contact-grid{grid-template-columns:1fr;gap:30px}
+    .hero-art{max-width:620px;width:100%;margin:auto}
+    .why-list{grid-template-columns:repeat(2,1fr)}
+    .stage-grid{grid-template-columns:92px 1fr}
+  }
+  @media (max-width:600px){
+    .wrap{padding:0 18px}
+    .nav-inner{padding:10px 18px}
+    .nav .cta{padding:8px 12px;font-size:13px}
+    .hero{padding-top:40px}
+    .hero-art{display:none}
+    .hero-meta span:not(.sep){width:100%}
+    .why-list{grid-template-columns:1fr}
+    .why-item{min-height:0;padding:18px}
+    .stage-card{padding:20px}
+    .stage-grid{grid-template-columns:1fr;gap:14px}
+    .stage-age{display:flex;align-items:center;gap:10px}
+    .stage-age .unit{margin:0}
+    .stage-age .tag{margin:0}
+    .criteria-card{padding:18px}
+    .form-grid{grid-template-columns:1fr}
+    footer .wrap{display:grid;grid-template-columns:1fr}
+    footer .footer-contact{flex-direction:column;gap:3px}
+  }
