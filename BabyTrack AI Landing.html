@@ -1,0 +1,1104 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>BabyTrack AI — Bezpłatne badanie rozwoju motorycznego niemowląt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="BabyTrack AI — projekt naukowo-badawczy prowadzony w Bydgoszczy. Bezpłatne, nieinwazyjne badanie rozwoju motorycznego niemowląt 2–3 miesiące. Rekrutacja od 1 sierpnia 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --paper:#fbf7f0;
+    --paper-2:#f4ecdd;
+    --paper-3:#efe5d2;
+    --ink:#1d2538;
+    --ink-soft:#56607a;
+    --ink-mute:#8c93a6;
+    --line:#1d2538;
+    --navy:#2a3a55;
+    --navy-2:#3a4b6d;
+    --sky:#d6e6ef;
+    --sky-2:#bcd3df;
+    --mint:#d8e7d8;
+    --mint-2:#bdd4be;
+    --sand:#f1e1c2;
+    --sand-2:#e6d09c;
+    --blush:#f2d8d0;
+    --blush-2:#e8baad;
+
+    --display: "Fraunces", "Cormorant Garamond", Georgia, serif;
+    --sans: "DM Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+
+    --maxw: 1180px;
+    --r: 18px;
+    --r-sm: 10px;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:17px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  ::selection{background:var(--sand);color:var(--ink)}
+
+  /* fade-in */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s ease, transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ============ NAV ============ */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    backdrop-filter:saturate(1.1) blur(8px);
+    background:rgba(251,247,240,.82);
+    border-bottom:1px solid rgba(29,37,56,.08);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;
+    display:flex;align-items:center;gap:18px;
+    padding:14px 24px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+  .brand .mark{
+    width:42px;height:42px;border-radius:50%;
+    background:#fff;
+    display:grid;place-items:center;
+    box-shadow:inset 0 0 0 1px rgba(29,37,56,.12), 0 2px 8px -2px rgba(29,37,56,.15);
+    overflow:hidden;
+  }
+  .brand .mark img{width:88%;height:88%;object-fit:contain}
+  footer .brand .mark{background:#fff}
+  .brand .name{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-0.01em}
+  .brand .name em{font-style:italic;color:var(--navy)}
+  .nav-links{display:flex;gap:22px;margin-left:auto}
+  .nav-links a{color:var(--ink-soft);font-size:14.5px;text-decoration:none;font-weight:500}
+  .nav-links a:hover{color:var(--ink)}
+  .nav .cta{margin-left:6px}
+  @media (max-width:780px){.nav-links{display:none}.nav .cta{margin-left:auto}}
+
+  /* ============ BUTTONS ============ */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--sans);font-weight:500;font-size:15px;
+    padding:11px 20px;border-radius:999px;
+    border:1px solid var(--line);
+    background:transparent;color:var(--ink);
+    text-decoration:none;cursor:pointer;
+    transition:transform .15s ease, background .2s ease, color .2s ease;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn.primary{background:var(--navy);color:var(--paper);border-color:var(--navy)}
+  .btn.primary:hover{background:#1e2c45}
+  .btn .arr{transition:transform .2s ease}
+  .btn:hover .arr{transform:translateX(3px)}
+
+  /* ============ LAYOUT PRIMITIVES ============ */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:90px 0;position:relative}
+  @media (max-width:780px){section{padding:64px 0}}
+
+  .eyebrow{
+    font-family:var(--sans);font-weight:600;font-size:12.5px;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  .chapter-mark{
+    font-family:var(--display);font-style:italic;font-weight:500;
+    font-size:clamp(54px,7vw,86px);line-height:.9;color:var(--navy);
+    letter-spacing:-0.02em;
+  }
+  .chapter-head{display:flex;gap:28px;align-items:baseline;margin-bottom:32px;flex-wrap:wrap}
+  .chapter-head .num{min-width:100px}
+  .chapter-head h2{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-0.02em;
+    margin:0;max-width:780px;
+  }
+  .chapter-head .lede{
+    font-family:var(--sans);color:var(--ink-soft);max-width:560px;margin-top:8px;font-size:16.5px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding-top:72px;padding-bottom:48px;
+    background:
+      radial-gradient(ellipse 60% 50% at 88% 10%, var(--sky) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 10% 80%, var(--blush) 0%, transparent 65%),
+      var(--paper);
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center;
+  }
+  @media (max-width:880px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+  .hero-tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+  .recruit-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:#fff;border:1px solid var(--line);
+    font-size:13px;font-weight:500;color:var(--ink);
+  }
+  .recruit-pill .dot{
+    width:8px;height:8px;border-radius:50%;background:#c0392b;position:relative;
+  }
+  .recruit-pill .dot::after{
+    content:"";position:absolute;inset:-4px;border-radius:50%;
+    border:1px solid #c0392b;opacity:.5;animation:pulse 1.8s ease-out infinite;
+  }
+  @keyframes pulse{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.8);opacity:0}}
+  .h1{
+    font-family:var(--display);font-weight:500;
+    font-size:clamp(48px,7.6vw,92px);line-height:.96;letter-spacing:-0.025em;
+    margin:0 0 22px;color:var(--ink);
+  }
+  .h1 em{font-style:italic;color:var(--navy);font-weight:500}
+  .hero-sub{
+    font-size:19px;color:var(--ink-soft);max-width:520px;margin:0 0 28px;
+    line-height:1.55;
+  }
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+  .hero-meta{
+    display:flex;gap:18px;flex-wrap:wrap;color:var(--ink-soft);font-size:14px;align-items:center;
+  }
+  .hero-meta b{color:var(--ink);font-weight:600}
+  .hero-meta .sep{width:4px;height:4px;border-radius:50%;background:var(--ink-mute)}
+
+  .hero-art{
+    position:relative;aspect-ratio:1/1.05;
+    border-radius:var(--r);overflow:hidden;
+    background:
+      radial-gradient(ellipse 70% 50% at 80% 90%, var(--blush) 0%, transparent 65%),
+      radial-gradient(ellipse 70% 50% at 20% 10%, var(--mint) 0%, transparent 65%),
+      var(--sand);
+    box-shadow:0 30px 60px -30px rgba(29,37,56,.35), inset 0 0 0 1px rgba(29,37,56,.06);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-art .hero-logo{
+    width:80%;height:auto;max-width:520px;
+    filter:drop-shadow(0 18px 30px rgba(29,37,56,.18));
+  }
+  .hero-art .deco{position:absolute;inset:0;pointer-events:none;opacity:.55}
+  .hero-art .badge{
+    position:absolute;left:18px;bottom:18px;z-index:5;
+    background:rgba(255,255,255,.95);border-radius:14px;padding:12px 14px;
+    box-shadow:0 12px 30px -12px rgba(29,37,56,.35);
+    display:flex;gap:10px;align-items:center;
+    font-size:13.5px;color:var(--ink);backdrop-filter:blur(4px);
+  }
+  .hero-art .badge svg{flex-shrink:0}
+
+  /* funding strip */
+  .funding{
+    margin-top:48px;padding-top:28px;
+    border-top:1px solid rgba(29,37,56,.12);
+    display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center;
+  }
+  .funding .label{
+    font-size:12.5px;color:var(--ink-soft);max-width:680px;font-weight:500;line-height:1.55;
+  }
+  .funding .logos{display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap}
+  .logo-slot{
+    height:44px;min-width:96px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px dashed rgba(29,37,56,.28);border-radius:6px;
+    background:rgba(255,255,255,.5);
+    font-size:11px;color:var(--ink-mute);letter-spacing:.06em;text-transform:uppercase;
+    padding:0 12px;
+  }
+  .logo-slot.flag-rp{width:64px;min-width:64px;background:linear-gradient(to bottom,#fff 50%,#dc143c 50%);border:1px solid rgba(29,37,56,.18);color:transparent}
+  .logo-slot.flag-eu{width:64px;min-width:64px;background:#003399;border:1px solid rgba(29,37,56,.18);position:relative;color:transparent}
+  .logo-slot.flag-eu::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 50%, transparent 7px, transparent 8px),
+      conic-gradient(from 0deg, transparent 0);
+  }
+  .logo-slot.flag-eu .stars{
+    position:absolute;inset:0;display:grid;place-items:center;color:#ffcc00;font-size:10px;letter-spacing:1px;
+  }
+
+  /* ============ CHAPTER I — DLACZEGO ============ */
+  .why{background:var(--paper)}
+  .why-list{
+    display:grid;grid-template-columns:1fr;gap:0;
+    border-top:1px solid rgba(29,37,56,.15);
+  }
+  .why-item{
+    display:grid;grid-template-columns:120px 1fr 1fr 80px;
+    gap:32px;padding:28px 0;align-items:flex-start;
+    border-bottom:1px solid rgba(29,37,56,.15);
+  }
+  @media (max-width:780px){.why-item{grid-template-columns:60px 1fr;gap:18px}.why-item .why-desc,.why-item .why-icon{grid-column:1/-1}.why-item .why-icon{display:flex;justify-content:flex-start}}
+  .why-num{
+    font-family:var(--display);font-style:italic;font-weight:500;
+    font-size:42px;color:var(--navy);line-height:1;
+  }
+  .why-title{
+    font-family:var(--display);font-weight:500;font-size:26px;line-height:1.15;
+    letter-spacing:-0.01em;margin:0;
+  }
+  .why-desc{color:var(--ink-soft);font-size:15.5px;line-height:1.55;margin:0}
+  .why-icon{display:flex;justify-content:flex-end}
+  .why-icon svg{width:56px;height:56px;color:var(--navy);stroke-width:1.4}
+
+  /* ============ CHAPTER II — STAGES (centerpiece) ============ */
+  .stages{
+    background:linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+    padding-bottom:120px;
+  }
+  .stage-card{
+    border-radius:24px;padding:40px;
+    border:1px solid rgba(29,37,56,.14);
+    background:#fff;
+    box-shadow:0 24px 60px -36px rgba(29,37,56,.28);
+    margin-bottom:22px;position:relative;overflow:hidden;
+  }
+  .stage-card.s1{background:linear-gradient(180deg, #eef4f9 0%, #f7f2e7 120%)}
+  .stage-card.s2{background:linear-gradient(180deg, #ecf2ec 0%, #f7eee5 120%)}
+  .stage-grid{
+    display:grid;grid-template-columns:140px 1.4fr 1fr;gap:36px;align-items:flex-start;
+  }
+  @media (max-width:880px){.stage-grid{grid-template-columns:1fr;gap:24px}}
+  .stage-age{text-align:center}
+  .stage-age .num{
+    font-family:var(--display);font-weight:500;font-style:italic;
+    font-size:68px;line-height:.9;color:var(--navy);letter-spacing:-0.03em;
+  }
+  .stage-age .unit{font-size:13px;color:var(--ink-soft);margin-top:4px;letter-spacing:.04em}
+  .stage-age .tag{
+    display:inline-block;margin-top:14px;padding:5px 12px;
+    border-radius:999px;background:#fff;border:1px solid rgba(29,37,56,.18);
+    font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  }
+  .stage-title{
+    font-family:var(--display);font-weight:500;font-size:30px;line-height:1.1;
+    letter-spacing:-0.015em;margin:0 0 6px;
+  }
+  .stage-duration{color:var(--ink-soft);font-size:14px;margin-bottom:18px}
+  .step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+  .step .bullet{
+    flex-shrink:0;margin-top:7px;width:6px;height:6px;border-radius:50%;background:var(--navy);
+  }
+  .step b{color:var(--ink);font-weight:600}
+  .step p{margin:0;font-size:15px;color:var(--ink);line-height:1.5}
+  .step p span{color:var(--ink-soft);font-size:14px}
+
+  .stage-art{
+    aspect-ratio:4/5;border-radius:14px;overflow:hidden;
+    position:relative;
+    box-shadow:inset 0 0 0 1px rgba(29,37,56,.08);
+  }
+  .stage-art.art-1{
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, #e3eef6 0%, transparent 70%),
+      linear-gradient(165deg, var(--sky) 0%, #eaf2ee 100%);
+  }
+  .stage-art.art-2{
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, #e6efe6 0%, transparent 70%),
+      linear-gradient(165deg, var(--mint) 0%, #f3eadc 100%);
+  }
+  .stage-art svg.fill{position:absolute;inset:0;width:100%;height:100%}
+  .stage-art .caption{
+    position:absolute;left:14px;right:14px;bottom:14px;
+    background:rgba(255,255,255,.92);border-radius:10px;padding:8px 12px;
+    font-size:12px;color:var(--ink-soft);font-style:italic;line-height:1.35;
+    backdrop-filter:blur(4px);
+  }
+
+  .between-stages{
+    display:flex;align-items:center;justify-content:center;gap:14px;margin:6px 0;color:var(--ink-soft);font-size:14px;
+    font-family:var(--display);font-style:italic;
+  }
+  .between-stages::before,.between-stages::after{
+    content:"";height:1px;background:rgba(29,37,56,.18);flex:1;max-width:200px;
+  }
+
+  .stages-note{
+    margin-top:28px;padding:24px 28px;border-radius:16px;
+    background:#fff;border:1px solid rgba(29,37,56,.14);
+    display:flex;gap:18px;align-items:flex-start;
+  }
+  .stages-note svg{flex-shrink:0;color:var(--navy)}
+  .stages-note .t{font-family:var(--display);font-weight:500;font-size:20px;margin:0 0 4px;letter-spacing:-0.01em}
+  .stages-note .d{color:var(--ink-soft);margin:0;font-size:15px}
+
+  /* ============ CHAPTER III — ABOUT ============ */
+  .about{background:var(--paper)}
+  .about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:48px;align-items:flex-start}
+  @media (max-width:880px){.about-grid{grid-template-columns:1fr;gap:32px}}
+  .about-lede{
+    font-family:var(--display);font-weight:400;font-size:24px;line-height:1.35;
+    color:var(--ink);margin:0 0 18px;letter-spacing:-0.005em;
+  }
+  .about-lede .dropcap{
+    font-family:var(--display);font-style:italic;font-weight:500;
+    float:left;font-size:64px;line-height:.85;padding:6px 10px 0 0;color:var(--navy);
+  }
+  .about p{color:var(--ink-soft);font-size:16px;line-height:1.6;margin:0 0 14px}
+  .disclaimer{
+    margin-top:24px;padding:18px 20px;border-radius:14px;
+    background:var(--paper-3);border:1px solid rgba(29,37,56,.12);
+  }
+  .disclaimer .t{font-weight:600;color:var(--ink);font-size:14.5px;margin:0 0 4px;display:flex;gap:8px;align-items:center}
+  .disclaimer .d{color:var(--ink-soft);font-size:14.5px;margin:0;line-height:1.55}
+
+  .about-stats{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(29,37,56,.15)}
+  .stat{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:16px 0;border-bottom:1px solid rgba(29,37,56,.15);
+  }
+  .stat .v{font-family:var(--display);font-weight:500;font-size:32px;letter-spacing:-0.02em;color:var(--ink)}
+  .stat .v em{font-style:italic;color:var(--navy)}
+  .stat .l{color:var(--ink-soft);font-size:14px;text-align:right;max-width:220px}
+
+  /* ============ CHAPTER IV — CRITERIA ============ */
+  .criteria{background:linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%)}
+  .criteria-card{
+    background:#fff;border-radius:24px;padding:36px 40px;
+    border:1px solid rgba(29,37,56,.12);
+    box-shadow:0 20px 50px -30px rgba(29,37,56,.2);
+  }
+  .crit-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 40px}
+  @media (max-width:780px){.crit-grid{grid-template-columns:1fr}}
+  .crit{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid rgba(29,37,56,.08)}
+  .crit:last-child,.crit:nth-last-child(2){border-bottom:0}
+  @media (max-width:780px){.crit:nth-last-child(2){border-bottom:1px solid rgba(29,37,56,.08)}}
+  .crit .check{
+    flex-shrink:0;width:28px;height:28px;border-radius:50%;
+    background:var(--mint);display:grid;place-items:center;color:var(--navy);
+  }
+  .crit .t{font-weight:600;font-size:15px;margin:0 0 2px;color:var(--ink)}
+  .crit .d{color:var(--ink-soft);font-size:14px;margin:0;line-height:1.5}
+
+  /* ============ FAQ ============ */
+  .faq{background:var(--paper)}
+  .faq-list{border-top:1px solid rgba(29,37,56,.15)}
+  details.q{
+    border-bottom:1px solid rgba(29,37,56,.15);
+    padding:22px 0;
+  }
+  details.q summary{
+    list-style:none;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:24px;
+    font-family:var(--display);font-weight:500;font-size:22px;line-height:1.25;
+    color:var(--ink);letter-spacing:-0.01em;
+  }
+  details.q summary::-webkit-details-marker{display:none}
+  details.q summary .toggle{
+    flex-shrink:0;width:32px;height:32px;border-radius:50%;
+    border:1px solid rgba(29,37,56,.25);display:grid;place-items:center;
+    transition:transform .25s ease, background .2s ease;
+  }
+  details.q[open] summary .toggle{transform:rotate(45deg);background:var(--navy);color:#fff;border-color:var(--navy)}
+  details.q .a{
+    color:var(--ink-soft);font-size:16px;line-height:1.6;
+    max-width:780px;margin:14px 0 4px;
+  }
+
+  /* ============ CONTACT ============ */
+  .contact{
+    background:linear-gradient(180deg, var(--paper-2) 0%, var(--paper) 100%);
+  }
+  .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:flex-start}
+  @media (max-width:880px){.contact-grid{grid-template-columns:1fr;gap:32px}}
+  .contact-info{padding-top:8px}
+  .contact-info h3{
+    font-family:var(--display);font-weight:500;font-size:36px;line-height:1.05;letter-spacing:-0.02em;
+    margin:0 0 20px;
+  }
+  .contact-row{display:flex;gap:14px;margin:18px 0;align-items:flex-start}
+  .contact-row .ico{
+    flex-shrink:0;width:38px;height:38px;border-radius:50%;
+    background:var(--sky);display:grid;place-items:center;color:var(--navy);
+  }
+  .contact-row .l{color:var(--ink-soft);font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 2px}
+  .contact-row .v{margin:0;font-size:16px;color:var(--ink);font-weight:500;line-height:1.4}
+  .contact-row a{text-decoration:none;color:inherit}
+  .contact-row a:hover{color:var(--navy)}
+  .contact-row.address .v{font-weight:400}
+
+  .form-card{
+    background:#fff;border-radius:24px;padding:32px;
+    border:1px solid rgba(29,37,56,.12);
+    box-shadow:0 30px 70px -40px rgba(29,37,56,.3);
+  }
+  .form-card h4{
+    font-family:var(--display);font-weight:500;font-size:28px;margin:0 0 6px;letter-spacing:-0.015em;
+  }
+  .form-card .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 22px}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field.full{grid-column:1/-1}
+  .field label{font-size:13px;color:var(--ink-soft);font-weight:500}
+  .field input,.field textarea{
+    font:inherit;font-size:15px;color:var(--ink);
+    border:1px solid rgba(29,37,56,.2);border-radius:10px;
+    padding:12px 14px;background:#fff;outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+    width:100%;
+  }
+  .field textarea{resize:vertical;min-height:96px;font-family:var(--sans)}
+  .field input:focus,.field textarea:focus{
+    border-color:var(--navy);box-shadow:0 0 0 4px rgba(42,58,85,.1);
+  }
+  .form-card .submit-row{
+    margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .rodo{
+    margin-top:14px;font-size:12.5px;color:var(--ink-soft);line-height:1.5;
+    padding-top:14px;border-top:1px solid rgba(29,37,56,.1);
+  }
+  .form-thanks{display:none;text-align:center;padding:36px 12px}
+  .form-thanks.show{display:block}
+  .form-thanks svg{color:var(--navy);margin:0 auto 12px}
+  .form-thanks h5{font-family:var(--display);font-weight:500;font-size:24px;margin:0 0 6px}
+  .form-thanks p{color:var(--ink-soft);font-size:15px;margin:0}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink);color:#cfd4e0;padding:54px 0 40px;font-size:14px;line-height:1.55}
+  footer .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:flex-start}
+  @media (max-width:780px){footer .wrap{grid-template-columns:1fr;gap:28px}}
+  footer .brand .name{color:#fff}
+  footer .funding-text{margin-top:18px;color:#a7adba;font-size:13px;max-width:560px}
+  footer .logos-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:22px}
+  footer .logos-row img{background:#fff;padding:10px 14px;border-radius:8px;display:block}
+  footer .logos-row .funding-strip{height:60px;width:auto}
+  footer .right{font-size:13.5px;color:#a7adba}
+  footer .right a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
+  footer .copy{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);color:#8b91a0;font-size:12.5px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+  /* image-slot styling override */
+  image-slot{
+    --is-bg: rgba(29,37,56,.04);
+    --is-border: rgba(29,37,56,.15);
+    --is-color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="mark" aria-hidden="true"><img src="assets/babytrack-logo.png" alt=""></span>
+      <span class="name">BabyTrack&nbsp;<em>AI</em></span>
+    </a>
+    <div class="nav-links">
+      <a href="#dlaczego">Dlaczego</a>
+      <a href="#przebieg">Przebieg</a>
+      <a href="#o-projekcie">O projekcie</a>
+      <a href="#kryteria">Kryteria</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#kontakt" class="btn primary cta">Zapisz dziecko <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy reveal">
+        <div class="hero-tag">
+          <span class="recruit-pill"><span class="dot"></span> Rekrutacja trwa · od 1 sierpnia 2026</span>
+        </div>
+        <h1 class="h1">Pierwsze<br><em>miesiące</em> życia.</h1>
+        <p class="hero-sub">Bezpłatne, nieinwazyjne badanie rozwoju motorycznego niemowląt — wspierane przez sztuczną inteligencję, prowadzone w pracowni badawczej w Bydgoszczy.</p>
+        <div class="hero-ctas">
+          <a href="#kontakt" class="btn primary">Zapisz dziecko na badanie <span class="arr">→</span></a>
+          <a href="#przebieg" class="btn">Jak wygląda badanie</a>
+        </div>
+        <div class="hero-meta">
+          <span><b>2–3 mies.</b> — pierwsze badanie</span>
+          <span class="sep"></span>
+          <span><b>45–60 min</b> jedna wizyta</span>
+          <span class="sep"></span>
+          <span><b>Bydgoszcz</b> — miejsce badania</span>
+        </div>
+      </div>
+
+      <div class="hero-art reveal">
+        <svg class="deco" viewBox="0 0 400 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <pattern id="dots" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.2" fill="#2a3a55" opacity="0.18"></circle>
+            </pattern>
+          </defs>
+          <rect width="400" height="420" fill="url(#dots)"></rect>
+        </svg>
+        <img class="hero-logo" src="assets/babytrack-logo.png" alt="Logo BabyTrack AI">
+        <div class="badge">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a3a55" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z"></path>
+          </svg>
+          <span>Bezpłatnie · nieinwazyjnie · bezpiecznie</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="funding reveal">
+      <div class="label">Projekt realizowany w ramach programu <b>Science4Business — Nauka dla Biznesu</b>, dofinansowany ze środków UE (FENG 2021–2027).</div>
+      <div class="logos">
+        <img src="assets/funding-strip.png" alt="Fundusze Europejskie dla Nowoczesnej Gospodarki · Rzeczpospolita Polska · Dofinansowane przez Unię Europejską" style="height:44px;width:auto;max-width:100%">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER I — WHY ============ -->
+<section class="why" id="dlaczego">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Rozdział</span>
+        <div class="chapter-mark">I.</div>
+      </div>
+      <div>
+        <h2>Cztery powody, dla&nbsp;których&nbsp;to ma&nbsp;sens.</h2>
+        <p class="lede">Dlaczego warto wziąć udział — co konkretnie zyskuje Twoje dziecko i&nbsp;Ty&nbsp;jako rodzic.</p>
+      </div>
+    </div>
+
+    <div class="why-list">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <h3 class="why-title">Wczesne wykrycie</h3>
+        <p class="why-desc">System pomaga wychwycić potencjalne zaburzenia neurologiczne na wczesnym etapie — wtedy, gdy terapia jest najskuteczniejsza, a wpływ na rozwój dziecka największy.</p>
+        <div class="why-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="28" cy="28" r="14"/>
+            <path d="M38 38l12 12"/>
+            <path d="M22 28h12M28 22v12"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <h3 class="why-title">Profesjonalna ocena</h3>
+        <p class="why-desc">Badanie prowadzi doświadczony fizjoterapeuta dziecięcy, specjalizujący się w&nbsp;ocenie rozwoju motorycznego niemowląt. To rzetelna, profesjonalna ocena kliniczna.</p>
+        <div class="why-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 12v18a12 12 0 0 0 24 0V12"/>
+            <circle cx="20" cy="12" r="3"/>
+            <circle cx="44" cy="12" r="3"/>
+            <path d="M32 42v6a6 6 0 0 0 12 0"/>
+            <circle cx="44" cy="50" r="4"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <h3 class="why-title">Bezpłatnie i&nbsp;bezpiecznie</h3>
+        <p class="why-desc">Udział w&nbsp;projekcie jest całkowicie bezpłatny. Badanie opiera się wyłącznie na obserwacji i&nbsp;rejestracji ruchów dziecka kamerami — bez markerów, bez kontaktu fizycznego.</p>
+        <div class="why-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M32 8l20 8v14c0 12-9 21-20 26-11-5-20-14-20-26V16l20-8z"/>
+            <path d="M24 32l6 6 12-12"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <h3 class="why-title">Raport dla rodzica</h3>
+        <p class="why-desc">Po każdym etapie otrzymujesz informację zwrotną o rozwoju motorycznym dziecka — wraz z indywidualną rozmową ze specjalistą.</p>
+        <div class="why-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 10h22l10 10v34a2 2 0 0 1-2 2H16a2 2 0 0 1-2-2V12a2 2 0 0 1 2-2z"/>
+            <path d="M38 10v10h10"/>
+            <path d="M22 32h20M22 40h20M22 48h12"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER II — STAGES (CENTERPIECE) ============ -->
+<section class="stages" id="przebieg">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Rozdział</span>
+        <div class="chapter-mark">II.</div>
+      </div>
+      <div>
+        <h2>Dwa spotkania</h2>
+        <p class="lede">Tak wygląda przebieg badania — krok po kroku, dokładnie tak jak zobaczysz to w&nbsp;pracowni.</p>
+      </div>
+    </div>
+
+    <!-- STAGE 1 -->
+    <div class="stage-card s1 reveal">
+      <div class="stage-grid">
+        <div class="stage-age">
+          <div class="num">2–3</div>
+          <div class="unit">miesiące</div>
+          <div class="tag">Etap 1</div>
+        </div>
+        <div>
+          <h3 class="stage-title">Pierwsza wizyta w&nbsp;pracowni</h3>
+          <div class="stage-duration">~ 30–45 minut · pracownia badawcza w&nbsp;Bydgoszczy</div>
+          <div class="step"><span class="bullet"></span><p><b>Stanowisko badawcze.</b> <span>Dziecko układane jest na specjalnie zaprojektowanym, miękkim stanowisku.</span></p></div>
+          <div class="step"><span class="bullet"></span><p><b>Wielokamerowa rejestracja.</b> <span>System kamer rejestruje spontaniczne ruchy — bez markerów, bez kontaktu.</span></p></div>
+          <div class="step"><span class="bullet"></span><p><b>Blat-monitor z&nbsp;przepływem optycznym.</b> <span>Delikatna animacja stymuluje aktywność ruchową dziecka.</span></p></div>
+          <div class="step"><span class="bullet"></span><p><b>Ocena kliniczna.</b> <span>Doświadczony fizjoterapeuta dziecięcy ocenia rozwój motoryczny dziecka.</span></p></div>
+        </div>
+        <div class="stage-art art-1">
+          <svg class="fill" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width: 270.455px">
+            <!-- faint grid -->
+            <g stroke="#2a3a55" stroke-opacity=".08" stroke-width="1">
+              <line x1="0" y1="100" x2="320" y2="100"></line>
+              <line x1="0" y1="200" x2="320" y2="200"></line>
+              <line x1="0" y1="300" x2="320" y2="300"></line>
+              <line x1="80" y1="0" x2="80" y2="400"></line>
+              <line x1="160" y1="0" x2="160" y2="400"></line>
+              <line x1="240" y1="0" x2="240" y2="400"></line>
+            </g>
+            <!-- 4 corner viewfinder marks -->
+            <g stroke="#2a3a55" stroke-width="2" stroke-linecap="round" fill="none" opacity=".55">
+              <path d="M22 38 L22 22 L38 22"></path>
+              <path d="M298 22 L282 22 L298 38" transform="rotate(90 290 30)"></path>
+              <path d="M298 378 L298 362 L282 378" transform="rotate(180 290 370)"></path>
+              <path d="M22 362 L22 378 L38 378" transform="rotate(270 30 370)"></path>
+            </g>
+            <!-- flowing motion trail -->
+            <path d="M40 320 Q90 240 140 270 T240 180 Q280 140 290 90" fill="none" stroke="#2a3a55" stroke-opacity=".22" stroke-width="1.4" stroke-dasharray="2 4"></path>
+            <g fill="#2a3a55">
+              <circle cx="40" cy="320" r="3" opacity=".35"></circle>
+              <circle cx="62" cy="298" r="3.5" opacity=".45"></circle>
+              <circle cx="86" cy="278" r="4" opacity=".55"></circle>
+              <circle cx="112" cy="268" r="4.5" opacity=".65"></circle>
+              <circle cx="140" cy="270" r="5" opacity=".75"></circle>
+              <circle cx="168" cy="258" r="5" opacity=".75"></circle>
+              <circle cx="196" cy="232" r="5.5" opacity=".8"></circle>
+              <circle cx="220" cy="206" r="6" opacity=".85"></circle>
+              <circle cx="240" cy="180" r="6.5" opacity=".9"></circle>
+              <circle cx="262" cy="148" r="7" opacity=".95"></circle>
+              <circle cx="284" cy="110" r="8" opacity="1"></circle>
+            </g>
+            <!-- small focus ring on last dot -->
+            <circle cx="284" cy="110" r="18" fill="none" stroke="#2a3a55" stroke-opacity=".35" stroke-width="1.4"></circle>
+            <circle cx="284" cy="110" r="28" fill="none" stroke="#2a3a55" stroke-opacity=".18" stroke-width="1"></circle>
+          </svg>
+          <div class="caption">Wizualizacja: ślad ruchu rejestrowany przez system wielokamerowy.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="between-stages reveal"><span>~&nbsp;5 miesięcy później</span></div>
+
+    <!-- STAGE 2 -->
+    <div class="stage-card s2 reveal">
+      <div class="stage-grid">
+        <div class="stage-age">
+          <div class="num">7–8</div>
+          <div class="unit">miesięcy</div>
+          <div class="tag">Etap 2</div>
+        </div>
+        <div>
+          <h3 class="stage-title">Wizyta kontrolna · pełen obraz rozwoju</h3>
+          <div class="stage-duration">Ten sam zespół, to samo miejsce · Bydgoszcz</div>
+          <div class="step"><span class="bullet"></span><p><b>Ocena motoryczna.</b> <span>Kontrolne badanie rozwoju ruchowego przez fizjoterapeutę dziecięcego — z&nbsp;porównaniem do&nbsp;pierwszego etapu.</span></p></div>
+          <div class="step"><span class="bullet"></span><p><b>Raport podsumowujący.</b> <span>Otrzymujesz pisemne podsumowanie z&nbsp;porównaniem wyników obu etapów.</span></p></div>
+          <div class="step"><span class="bullet"></span><p><b>Indywidualna rozmowa.</b> <span>Możliwość zadania pytań i&nbsp;omówienia wyników bezpośrednio ze specjalistami.</span></p></div>
+        </div>
+        <div class="stage-art art-2">
+          <svg class="fill" viewBox="0 0 320 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <!-- paper document -->
+            <g transform="translate(56 50)">
+              <rect x="4" y="6" width="208" height="300" rx="8" fill="#2a3a55" opacity=".08"></rect>
+              <rect x="0" y="0" width="208" height="300" rx="8" fill="#ffffff" stroke="#2a3a55" stroke-opacity=".2" stroke-width="1.2"></rect>
+              <!-- title bar -->
+              <rect x="20" y="24" width="100" height="7" rx="3" fill="#2a3a55" opacity=".75"></rect>
+              <rect x="20" y="38" width="60" height="5" rx="2" fill="#2a3a55" opacity=".25"></rect>
+              <!-- mini text lines -->
+              <g fill="#2a3a55" opacity=".22">
+                <rect x="20" y="60" width="168" height="3" rx="1.5"></rect>
+                <rect x="20" y="68" width="140" height="3" rx="1.5"></rect>
+                <rect x="20" y="76" width="152" height="3" rx="1.5"></rect>
+              </g>
+              <!-- comparison label -->
+              <text x="20" y="108" font-family="DM Sans, sans-serif" font-size="9" font-weight="600" fill="#2a3a55" opacity=".7">2–3 mies. → 7–8 mies.</text>
+              <!-- chart bars: pair groups -->
+              <g transform="translate(20 120)">
+                <!-- baseline -->
+                <line x1="0" y1="110" x2="168" y2="110" stroke="#2a3a55" stroke-opacity=".25" stroke-width="1"></line>
+                <!-- group 1 -->
+                <rect x="0" y="60" width="14" height="50" fill="#bdd4be"></rect>
+                <rect x="18" y="35" width="14" height="75" fill="#2a3a55" opacity=".85"></rect>
+                <!-- group 2 -->
+                <rect x="50" y="70" width="14" height="40" fill="#bdd4be"></rect>
+                <rect x="68" y="30" width="14" height="80" fill="#2a3a55" opacity=".85"></rect>
+                <!-- group 3 -->
+                <rect x="100" y="50" width="14" height="60" fill="#bdd4be"></rect>
+                <rect x="118" y="20" width="14" height="90" fill="#2a3a55" opacity=".85"></rect>
+                <!-- group 4 -->
+                <rect x="150" y="75" width="14" height="35" fill="#bdd4be"></rect>
+              </g>
+              <!-- bottom signature lines -->
+              <g fill="#2a3a55" opacity=".22">
+                <rect x="20" y="262" width="70" height="3" rx="1.5"></rect>
+                <rect x="20" y="272" width="100" height="3" rx="1.5"></rect>
+              </g>
+            </g>
+            <!-- floating arrow showing progress -->
+            <g transform="translate(220 110)">
+              <circle cx="0" cy="0" r="24" fill="#fff" stroke="#2a3a55" stroke-opacity=".25" stroke-width="1.2"></circle>
+              <path d="M-10 6 L0 -8 L10 6" fill="none" stroke="#2a3a55" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              <line x1="0" y1="-8" x2="0" y2="8" stroke="#2a3a55" stroke-width="2" stroke-linecap="round"></line>
+            </g>
+          </svg>
+          <div class="caption">Wizualizacja: raport porównawczy z dwóch etapów badania.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stages-note reveal">
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="20" cy="20" r="16"/>
+        <path d="M20 13v8M20 26v.5"/>
+      </svg>
+      <div>
+        <p class="t">Udział w&nbsp;obu etapach jest kluczowy.</p>
+        <p class="d">Dopiero porównanie momentu <b>2–3&nbsp;mies.</b> i&nbsp;<b>7–8&nbsp;mies.</b> pozwala odróżnić chwilowe wahania od rzeczywistych wzorców rozwoju i&nbsp;dać Ci pełną, rzetelną informację o&nbsp;dziecku.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER III — ABOUT ============ -->
+<section class="about" id="o-projekcie">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Rozdział</span>
+        <div class="chapter-mark">III.</div>
+      </div>
+      <div>
+        <h2>Co budujemy?</h2>
+        <p class="lede">BabyTrack AI to projekt naukowo-badawczy z&nbsp;pogranicza sztucznej inteligencji i&nbsp;wczesnej diagnostyki rozwoju niemowląt.</p>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="reveal">
+        <p class="about-lede"><span class="dropcap">B</span>abyTrack AI to innowacyjny system diagnostyczno-analityczny, który łączy wielokamerową rejestrację ruchów, analizę przepływu optycznego i&nbsp;sztuczną inteligencję do klasyfikacji wzorców motorycznych niemowląt.</p>
+        <p>Celem projektu jest stworzenie obiektywnego, powtarzalnego narzędzia, które wesprze specjalistów we&nbsp;wczesnej diagnostyce zaburzeń rozwojowych — bez konieczności inwazyjnych metod i&nbsp;w&nbsp;przyjaznych dziecku warunkach.</p>
+        <p>Dane zbierane w&nbsp;ramach pierwszego etapu badań posłużą do&nbsp;wytrenowania algorytmu, który w&nbsp;przyszłości może wspierać codzienną pracę specjalistów.</p>
+
+        <div class="disclaimer">
+          <p class="t">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            Ważne zastrzeżenie
+          </p>
+          <p class="d">BabyTrack AI <b>nie jest wyrobem medycznym</b>. Jest narzędziem badawczym, wspomagającym ocenę rozwoju motorycznego prowadzoną przez wykwalifikowanych specjalistów.</p>
+        </div>
+      </div>
+
+      <div class="about-stats reveal">
+        <div class="stat">
+          <div class="v"><em>Bydgoszcz</em></div>
+          <div class="l">Miejsce realizacji projektu badawczego</div>
+        </div>
+        <div class="stat">
+          <div class="v">2–3 <em>mies.</em></div>
+          <div class="l">Wiek dziecka w&nbsp;1. etapie badania</div>
+        </div>
+        <div class="stat">
+          <div class="v">7–8 <em>mies.</em></div>
+          <div class="l">Wizyta kontrolna — etap 2</div>
+        </div>
+        <div class="stat">
+          <div class="v"><em>~3–4</em> mies.</div>
+          <div class="l">Okres rekrutacji od 1 sierpnia 2026</div>
+        </div>
+        <div class="stat">
+          <div class="v"><em>701/20</em></div>
+          <div class="l">Zgoda Komisji Biomedycznej UMP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAPTER IV — CRITERIA ============ -->
+<section class="criteria" id="kryteria">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Rozdział</span>
+        <div class="chapter-mark">IV.</div>
+      </div>
+      <div>
+        <h2>Kto może wziąć udział?</h2>
+        <p class="lede">Kilka prostych warunków — sprawdź, czy Twoje dziecko może dołączyć do&nbsp;badania.</p>
+      </div>
+    </div>
+
+    <div class="criteria-card reveal">
+      <div class="crit-grid">
+        <div class="crit">
+          <div class="check">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+          </div>
+          <div>
+            <p class="t">Wiek dziecka</p>
+            <p class="d">2–3 miesiące w&nbsp;momencie pierwszego badania.</p>
+          </div>
+        </div>
+        <div class="crit">
+          <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div>
+            <p class="t">Stan zdrowia</p>
+            <p class="d">Dzieci zdrowe, a&nbsp;także z&nbsp;podejrzeniem zaburzeń rozwojowych.</p>
+          </div>
+        </div>
+        <div class="crit">
+          <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div>
+            <p class="t">Zgoda rodzica</p>
+            <p class="d">Wymagana świadoma zgoda rodzica lub opiekuna prawnego.</p>
+          </div>
+        </div>
+        <div class="crit">
+          <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div>
+            <p class="t">Miejsce</p>
+            <p class="d">Badania prowadzone w&nbsp;Bydgoszczy.</p>
+          </div>
+        </div>
+        <div class="crit">
+          <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div>
+            <p class="t">Zgoda komisji bioetycznej</p>
+            <p class="d">Komisja Biomedyczna UMP, nr&nbsp;701/20.</p>
+          </div>
+        </div>
+        <div class="crit">
+          <div class="check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></div>
+          <div>
+            <p class="t">Bezpłatny udział</p>
+            <p class="d">Wszystkie wizyty i&nbsp;raporty są całkowicie bezpłatne.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Najczęstsze</span>
+        <div class="chapter-mark">?</div>
+      </div>
+      <div>
+        <h2>Pytania, które&nbsp;najczęściej zadają rodzice.</h2>
+      </div>
+    </div>
+
+    <div class="faq-list reveal">
+      <details class="q">
+        <summary>Czy badanie jest bezpieczne dla mojego dziecka?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Tak. Badanie jest całkowicie nieinwazyjne — nie używamy żadnych markerów, sensorów dotykowych ani środków kontrastowych. Dziecko jest jedynie obserwowane przez system kamer, podobnie jak podczas wizyty w&nbsp;poradni. Cały czas towarzyszy mu rodzic oraz zespół specjalistów.</p>
+      </details>
+      <details class="q">
+        <summary>Ile trwa jedna wizyta?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Pojedyncza wizyta trwa około 45–60 minut — wliczając czas na przygotowanie dziecka, rejestrację ruchów oraz ocenę kliniczną rozwoju motorycznego. Staramy się dopasować termin do&nbsp;rytmu dziecka (np.&nbsp;poza porą drzemki).</p>
+      </details>
+      <details class="q">
+        <summary>Czy potrzebuję skierowania?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Nie. Wystarczy zgłoszenie poprzez formularz na tej stronie lub kontakt telefoniczny / mailowy. Po wstępnej rozmowie umówimy termin pierwszej wizyty.</p>
+      </details>
+      <details class="q">
+        <summary>Co konkretnie otrzymam po badaniu?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Po każdym etapie otrzymujesz pisemny raport z&nbsp;oceny rozwoju motorycznego dziecka. Po drugim etapie raport zawiera porównanie obu badań. Zawsze możesz osobiście porozmawiać ze specjalistą i&nbsp;zadać pytania.</p>
+      </details>
+      <details class="q">
+        <summary>Jak chronione są dane mojego dziecka?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Dane osobowe i&nbsp;nagrania wideo są przetwarzane zgodnie z&nbsp;RODO, wyłącznie w&nbsp;celu realizacji projektu badawczego. Administratorem danych jest zespół badawczy projektu BabyTrack&nbsp;AI. Materiały są przechowywane w&nbsp;zaszyfrowanej formie i&nbsp;nie są udostępniane podmiotom trzecim.</p>
+      </details>
+      <details class="q">
+        <summary>Czy mogę wycofać się w trakcie badania?<span class="toggle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p class="a">Tak, w&nbsp;każdej chwili — bez konieczności podawania przyczyny i&nbsp;bez żadnych konsekwencji. Wycofanie zgody powoduje również usunięcie danych dziecka z&nbsp;bazy badania.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="kontakt">
+  <div class="wrap">
+    <div class="chapter-head reveal">
+      <div class="num">
+        <span class="eyebrow">Zapisz dziecko</span>
+        <div class="chapter-mark">V.</div>
+      </div>
+      <div>
+        <h2>Zadzwoń lub Napisz do nas</h2>
+        <p class="lede">Wypełnij krótki formularz albo skontaktuj się bezpośrednio z&nbsp;koordynatorem projektu.</p>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Koordynator projektu</h3>
+        <div class="contact-row">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          </div>
+          <div>
+            <p class="l">E-mail</p>
+            <p class="v"><a href="mailto:marek.andryszczyk@ukw.edu.pl">marek.andryszczyk@ukw.edu.pl</a></p>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          </div>
+          <div>
+            <p class="l">Telefon</p>
+            <p class="v"><a href="tel:+48883526573">+48 883 526 573</a></p>
+          </div>
+        </div>
+        <div class="contact-row address">
+          <div class="ico">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-7 7-13a7 7 0 0 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </div>
+          <div>
+            <p class="l">Adres pracowni</p>
+            <p class="v">Polski Związek Głuchych<br>
+            Oddział Kujawsko-Pomorski<br>
+            ul. Bernardyńska 3, 85-029 Bydgoszcz</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <form id="signup" novalidate>
+          <h4>Zapisz swoje dziecko na badanie</h4>
+          <p class="sub">Wypełnienie zajmuje około minuty. To zgłoszenie wstępne — skontaktujemy się, żeby umówić wizytę.</p>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="f-name">Imię rodzica / opiekuna *</label>
+              <input id="f-name" name="name" type="text" required placeholder="np. Anna Kowalska">
+            </div>
+            <div class="field">
+              <label for="f-contact">Telefon lub e-mail *</label>
+              <input id="f-contact" name="contact" type="text" required placeholder="kontakt zwrotny">
+            </div>
+            <div class="field">
+              <label for="f-dob">Data urodzenia dziecka *</label>
+              <input id="f-dob" name="dob" type="date" required>
+            </div>
+            <div class="field full">
+              <label for="f-msg">Wiadomość (opcjonalnie)</label>
+              <textarea id="f-msg" name="msg" placeholder="np. preferowane godziny, pytania, dodatkowe informacje…"></textarea>
+            </div>
+          </div>
+          <div class="submit-row">
+            <button class="btn primary" type="submit">Wyślij zgłoszenie <span class="arr">→</span></button>
+            <span style="font-size:13px;color:var(--ink-soft)">* pola wymagane</span>
+          </div>
+          <p class="rodo">Dane osobowe przetwarzane są zgodnie z&nbsp;<b>RODO</b> wyłącznie w&nbsp;celu realizacji projektu badawczego. Administratorem danych jest zespół badawczy projektu BabyTrack&nbsp;AI.</p>
+        </form>
+        <div class="form-thanks" id="thanks">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="22"/><path d="M14 24l7 7 14-14"/></svg>
+          <h5>Dziękujemy za&nbsp;zgłoszenie.</h5>
+          <p>Odezwiemy się w ciągu kilku dni, żeby umówić termin pierwszej wizyty.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="#top" class="brand">
+        <span class="mark" aria-hidden="true"><img src="assets/babytrack-logo.png" alt=""></span>
+        <span class="name">BabyTrack&nbsp;<em>AI</em></span>
+      </a>
+      <p class="funding-text">Projekt realizowany w&nbsp;ramach zadania nr&nbsp;1 «Inkubator Rozwoju» projektu Science4Business — Nauka dla Biznesu, dofinansowanego ze środków Unii Europejskiej w&nbsp;ramach działania 2.5 Programu Fundusze Europejskie dla Nowoczesnej Gospodarki 2021–2027.</p>
+      <div class="logos-row">
+        <img class="funding-strip" src="assets/funding-strip.png" alt="Fundusze Europejskie dla Nowoczesnej Gospodarki · Rzeczpospolita Polska · Dofinansowane przez Unię Europejską">
+      </div>
+    </div>
+    <div class="right">
+      <p style="margin:0 0 8px;color:#fff;font-family:var(--display);font-size:18px;font-weight:500">BabyTrack&nbsp;AI</p>
+      <p style="margin:0 0 4px">Projekt naukowo-badawczy</p>
+      <p style="margin:0 0 4px">Badanie rozwoju motorycznego<br>niemowląt</p>
+      <p style="margin:14px 0 4px"><a href="mailto:marek.andryszczyk@ukw.edu.pl">marek.andryszczyk@ukw.edu.pl</a></p>
+      <p style="margin:0">+48 883 526 573</p>
+    </div>
+    <div class="copy" style="grid-column:1/-1">
+      <span>© 2026 BabyTrack&nbsp;AI · Projekt naukowo-badawczy</span>
+      <span>Komisja Biomedyczna UMP, nr&nbsp;701/20 · BabyTrack AI nie jest wyrobem medycznym.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="image-slot.js"></script>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" fill="#fbf7f0"/>
+    <circle cx="100" cy="100" r="60" fill="#d6e6ef"/>
+    <text x="100" y="92" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="32" fill="#2a3a55">B</text>
+    <text x="100" y="124" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#2a3a55">BabyTrack AI</text>
+  </svg>
+</template>
+<script>
+  // Intersection Observer fade-in
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold:0.08, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // FAQ — single-open accordion (optional, comment out to allow multiple)
+  document.querySelectorAll('details.q').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        document.querySelectorAll('details.q').forEach(o => { if (o !== d) o.open = false; });
+      }
+    });
+  });
+
+  // Form — visual prototype: show thanks message
+  const form = document.getElementById('signup');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // very light validation
+    const name = form.elements['name'].value.trim();
+    const contact = form.elements['contact'].value.trim();
+    const dob = form.elements['dob'].value.trim();
+    if (!name || !contact || !dob) {
+      form.querySelectorAll('input[required]').forEach(i => {
+        if (!i.value.trim()) i.style.borderColor = '#c0392b';
+        i.addEventListener('input', () => i.style.borderColor = '', { once:true });
+      });
+      return;
+    }
+    form.style.display = 'none';
+    const thanks = document.getElementById('thanks');
+    thanks.classList.add('show');
+    const r = thanks.getBoundingClientRect();
+    window.scrollTo({ top: window.scrollY + r.top - 120, behavior:'smooth' });
+  });
+</script>
+</body>
+</html>
