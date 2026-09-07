@@ -15,11 +15,13 @@
     });
   });
 
-  // Form — visual prototype: show thanks message
+  // Form — send the application to Formspree and show the existing confirmation.
   const form = document.getElementById('signup');
-  form.addEventListener('submit', (e) => {
+  const errorMessage = document.getElementById('form-error');
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    // very light validation
     const name = form.elements['name'].value.trim();
     const contact = form.elements['contact'].value.trim();
     const dob = form.elements['dob'].value.trim();
@@ -30,9 +32,30 @@
       });
       return;
     }
-    form.style.display = 'none';
-    const thanks = document.getElementById('thanks');
-    thanks.classList.add('show');
-    const r = thanks.getBoundingClientRect();
-    window.scrollTo({ top: window.scrollY + r.top - 120, behavior:'smooth' });
+
+    errorMessage.hidden = true;
+    submitButton.disabled = true;
+    submitButton.setAttribute('aria-busy', 'true');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+
+      if (!response.ok) throw new Error('Formspree request failed');
+
+      form.style.display = 'none';
+      const thanks = document.getElementById('thanks');
+      thanks.classList.add('show');
+      const r = thanks.getBoundingClientRect();
+      window.scrollTo({ top: window.scrollY + r.top - 120, behavior:'smooth' });
+    } catch (error) {
+      errorMessage.hidden = false;
+      console.error('Nie udało się wysłać formularza:', error);
+    } finally {
+      submitButton.disabled = false;
+      submitButton.removeAttribute('aria-busy');
+    }
   });

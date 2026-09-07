@@ -504,7 +504,7 @@
       </div>
 
       <div class="form-card reveal">
-        <form id="signup" novalidate>
+        <form id="signup" action="https://formspree.io/f/xaeyppoj" method="POST" novalidate>
           <h4>Zapisz swoje dziecko na badanie</h4>
           <p class="sub">Wypełnienie zajmuje około minuty. To zgłoszenie wstępne — skontaktujemy się, żeby umówić wizytę.</p>
           <div class="form-grid">
@@ -529,6 +529,7 @@
             <button class="btn primary" type="submit">Wyślij zgłoszenie <span class="arr">→</span></button>
             <span style="font-size:13px;color:var(--ink-soft)">* pola wymagane</span>
           </div>
+          <p class="form-error" id="form-error" role="alert" hidden>Nie udało się wysłać zgłoszenia. Spróbuj ponownie za chwilę.</p>
           <p class="rodo">Dane osobowe przetwarzane są zgodnie z&nbsp;<b>RODO</b> wyłącznie w&nbsp;celu realizacji projektu badawczego. Administratorem danych jest zespół badawczy projektu BabyTrack&nbsp;AI.</p>
         </form>
         <div class="form-thanks" id="thanks">

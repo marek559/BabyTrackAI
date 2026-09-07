@@ -448,6 +448,8 @@
   .form-thanks svg{color:var(--navy);margin:0 auto 12px}
   .form-thanks h5{font-family:var(--display);font-weight:500;font-size:24px;margin:0 0 6px}
   .form-thanks p{color:var(--ink-soft);font-size:15px;margin:0}
+  .form-error{margin:12px 0 0;color:#c0392b;font-size:13px}
+  .submit-row .btn:disabled{cursor:wait;opacity:.7}
 
   /* ============ FOOTER ============ */
   footer{background:var(--ink);color:#cfd4e0;padding:54px 0 40px;font-size:14px;line-height:1.55}
