@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>BabyTrack AI - wizytówka</title>
+<!-- Arkusz A4: 10 wizytówek 90 × 50 mm. Strona 1 — awers, strona 2 — rewers.
+     Treść jednej wizytówki jest w szablonach #front i #back na dole pliku — zmiany wpisuj tylko tam.
+     PDF: Chrome → Drukuj → Zapisz jako PDF, A4, marginesy: brak, grafika tła: włączona. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}
+:root{
+  --paper:#fffdf9;--ink:#000;--sky:#e2ead9;--sky-deep:#8fa87d;--tint:#f7eddc;--peach:#f9e2d5;
+  --display:"Fraunces",Georgia,serif;--sans:"DM Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sheet{width:210mm;height:297mm;padding:23.6mm 15.1mm 0;display:grid;grid-template-columns:repeat(2,90mm);grid-auto-rows:50mm;align-content:start;page-break-after:always;overflow:hidden}
+.sheet:last-child{page-break-after:auto}
+.card{width:90mm;height:50mm;overflow:hidden;border:.26mm solid var(--sky-deep);font-family:var(--sans);color:var(--ink);line-height:1.3}
+
+/* awers */
+.front{background:linear-gradient(135deg,var(--sky) 0%,var(--tint) 55%,var(--peach) 100%);padding:3.4mm 4.2mm 3mm;display:flex;flex-direction:column}
+.head{display:flex;align-items:center;gap:2.6mm}
+.logo{width:10.6mm;height:10.6mm;border-radius:50%;background:var(--paper);border:.26mm solid var(--ink);display:grid;place-items:center;overflow:hidden;flex:none}
+.logo img{width:90%;height:90%;object-fit:contain}
+.brand{font-family:var(--display);font-weight:600;font-size:12pt;letter-spacing:-.02em;line-height:1;margin:0}
+.brand em{font-style:italic;font-weight:500}
+.sub{font-size:5.2pt;letter-spacing:.1em;text-transform:uppercase;font-weight:700;margin:.8mm 0 0}
+.desc{font-size:6pt;margin:1.8mm 0 0}
+.desc b{font-weight:700}
+.rule{height:.26mm;background:var(--ink);margin:1.8mm 0 1.6mm}
+.tel{display:flex;align-items:baseline;gap:1.6mm;margin:0 0 .7mm;font-size:5.6pt}
+.tel svg,.mail svg{width:2.2mm;height:2.2mm;flex:none;align-self:center}
+.tel b{font-size:7pt;font-weight:700;white-space:nowrap}
+.mail{display:flex;align-items:center;gap:1.6mm;font-size:6pt;margin:.2mm 0 .7mm}
+.mail span:last-child{margin-left:auto;font-weight:700}
+.addr{font-size:5pt;margin:1.2mm 0 0;padding-top:1.2mm;border-top:.2mm solid var(--sky-deep)}
+
+/* rewers */
+.back{background:var(--paper);padding:3.4mm 4.2mm 3mm;display:flex;flex-direction:column}
+.bhead{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:1.6mm;border-bottom:.26mm solid var(--ink)}
+.bhead h3{font-family:var(--display);font-weight:600;font-size:9.5pt;letter-spacing:-.015em;margin:0}
+.bhead span{font-size:4.8pt;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.stage{border:.3mm solid var(--ink);border-radius:1.6mm;padding:1.4mm 2.4mm 1.6mm;margin-top:1.6mm}
+.stage.s1{background:var(--sky)}
+.stage.s2{background:var(--tint)}
+.stage .top{display:flex;justify-content:space-between;font-size:5.2pt}
+.stage .top b{letter-spacing:.1em;text-transform:uppercase}
+.stage .fields{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:.6mm}
+.stage .fields div{font-size:4.6pt;font-weight:700;letter-spacing:.06em;border-bottom:.26mm solid var(--ink);height:4.6mm}
+.bnote{display:flex;gap:1.6mm;align-items:flex-start;font-size:5.2pt;margin-top:auto;padding-top:1.4mm;border-top:.26mm solid var(--ink)}
+.bnote svg{width:2.4mm;height:2.4mm;flex:none}
+.bnote b{font-weight:700}
+</style>
+</head>
+<body>
+<div class="sheet" id="fronts"></div>
+<div class="sheet" id="backs"></div>
+
+<template id="front">
+  <div class="card front">
+    <div class="head">
+      <span class="logo"><img src="assets/babytrack-logo.png" alt=""></span>
+      <div>
+        <p class="brand">BabyTrack <em>AI</em></p>
+        <p class="sub">Badanie rozwoju motorycznego niemowląt</p>
+      </div>
+    </div>
+    <p class="desc">Projekt naukowo-badawczy <b>UKW w Bydgoszczy</b>. Bezpłatna, nieinwazyjna ocena rozwoju ruchowego niemowląt.</p>
+    <div class="rule"></div>
+    <div class="tel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+      <b>609 222 466</b><span>Marek Andryszczyk, koordynator projektu</span>
+    </div>
+    <div class="tel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+      <b>667 727 543</b><span>Żaneta Pawlak-Andryszczyk, fizjoterapeuta dziecięcy</span>
+    </div>
+    <div class="mail">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      <span>marek.andryszczyk@ukw.edu.pl</span><span>www.babytrackai.pl</span>
+    </div>
+    <p class="addr">Polski Związek Głuchych — Oddział Kujawsko-Pomorski, ul. Bernardyńska 3, 85-029 Bydgoszcz</p>
+  </div>
+</template>
+
+<template id="back">
+  <div class="card back">
+    <div class="bhead"><h3>Terminy badań</h3><span>Wypełnia zespół badawczy</span></div>
+    <div class="stage s1">
+      <div class="top"><b>Etap 1 — badanie pierwsze</b><span>2.–3. miesiąc życia</span></div>
+      <div class="fields"><div>DATA</div><div>GODZINA</div></div>
+    </div>
+    <div class="stage s2">
+      <div class="top"><b>Etap 2 — wizyta kontrolna</b><span>7.–8. miesiąc życia</span></div>
+      <div class="fields"><div>DATA</div><div>GODZINA</div></div>
+    </div>
+    <div class="bnote">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7.5v5.5M12 16v.4"/></svg>
+      <p style="margin:0"><b>Prosimy o udział w obu etapach.</b> Zmiana terminu — prosimy o kontakt telefoniczny: <span style="white-space:nowrap">609 222 466</span> lub <span style="white-space:nowrap">667 727 543</span>.</p>
+    </div>
+  </div>
+</template>
+
+<script>
+for (const [tpl, sheet] of [['front', 'fronts'], ['back', 'backs']]) {
+  const t = document.getElementById(tpl), s = document.getElementById(sheet);
+  for (let i = 0; i < 10; i++) s.appendChild(t.content.cloneNode(true));
+}
+</script>
+</body>
+</html>
