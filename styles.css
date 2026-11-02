@@ -519,7 +519,6 @@
   .step{margin:7px 0}
   .step .bullet{margin-top:6px}
   .step p,.step p span{font-size:13.5px}
-  .stage-grid > div:nth-child(2) .step:nth-of-type(n+4){display:none}
   .between-stages{margin:8px 0;font-size:13px}
   .stages-note{display:none}
 
